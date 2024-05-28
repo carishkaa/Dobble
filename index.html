@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
-      
       body {
         /* display: flex;
         justify-content: center;
@@ -115,16 +114,80 @@
           transform: translateX(0);
         }
         25% {
-          transform: translateX(10px);
+          transform: translateX(3px);
         }
         50% {
-          transform: translateX(-10px);
+          transform: translateX(-3px);
         }
         75% {
-          transform: translateX(10px);
+          transform: translateX(3px);
         }
         100% {
           transform: translateX(0);
+        }
+      }
+
+      @media screen and (max-width: 890px) {
+        .game {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
+        .container {
+          width: 300px;
+          height: 300px;
+        }
+        #result {
+          font-size: 30px;
+        }
+        .container:nth-child(1) {
+          transform: translateY(-51%);
+        }
+        .container:nth-child(2) {
+          transform: translateY(51%);
+        }
+        #result {
+          position: absolute;
+          top: 95%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          font-size: 30px;
+          font-weight: bold;
+          border-radius: 10%;
+          padding: 6px;
+          background-color: violet;
+        }
+        .icon-container:is(.center) {
+          transform: translate(-50%, -50%) scale(0.7);
+        }
+        .icon-container:nth-child(2):not(.center) {
+          transform: translate(-50%, -50%) rotate(51.4deg) translate(100px)
+            scale(0.7);
+        }
+        .icon-container:nth-child(3):not(.center) {
+          transform: translate(-50%, -50%) rotate(102.8deg) translate(100px)
+            scale(0.7);
+        }
+        .icon-container:nth-child(4):not(.center) {
+          transform: translate(-50%, -50%) rotate(154.3deg) translate(100px)
+            scale(0.7);
+        }
+        .icon-container:nth-child(5):not(.center) {
+          transform: translate(-50%, -50%) rotate(205.71deg) translate(100px)
+            scale(0.7);
+        }
+        .icon-container:nth-child(6):not(.center) {
+          transform: translate(-50%, -50%) rotate(257.14deg) translate(100px)
+            scale(0.7);
+        }
+        .icon-container:nth-child(7):not(.center) {
+          transform: translate(-50%, -50%) rotate(308.6deg) translate(100px)
+            scale(0.7);
+        }
+        .icon-container:nth-child(8):not(.center) {
+          transform: translate(-50%, -50%) rotate(360deg) translate(100px)
+            scale(0.7);
         }
       }
     </style>
@@ -132,24 +195,22 @@
   </head>
   <body>
     <div class="game">
-        <div id="main" class="container">
-          <div class="icon-container center" id="icon-container-1"></div>
-          <div class="icon-container" id="icon-container-2"></div>
-          <div class="icon-container" id="icon-container-3"></div>
-          <div class="icon-container" id="icon-container-4"></div>
-          <div class="icon-container" id="icon-container-5"></div>
-          <div class="icon-container" id="icon-container-6"></div>
-          <div class="icon-container" id="icon-container-7"></div>
-          <div class="icon-container" id="icon-container-8"></div>
-        </div>
-        <div id="main2" class="container"></div>
+      <div id="main" class="container">
+        <div class="icon-container center" id="icon-container-1"></div>
+        <div class="icon-container" id="icon-container-2"></div>
+        <div class="icon-container" id="icon-container-3"></div>
+        <div class="icon-container" id="icon-container-4"></div>
+        <div class="icon-container" id="icon-container-5"></div>
+        <div class="icon-container" id="icon-container-6"></div>
+        <div class="icon-container" id="icon-container-7"></div>
+        <div class="icon-container" id="icon-container-8"></div>
+      </div>
+      <div id="main2" class="container"></div>
     </div>
 
     <div id="result">
       <b>Score: <span id="score">0</span></b>
     </div>
-
-    
 
     <script type="module" src="./main.js" defer></script>
   </body>
