@@ -1,4 +1,5 @@
-import { DobbleDeckGenerator } from "./PermutationsGenerator.js";
+import { DobbleDeckGenerator } from "./permutationsGenerator.js";
+import { GeolocationService } from "./geolocationService.js";
 
 function shuffle(array) {
   const length = array == null ? 0 : array.length;
@@ -18,6 +19,13 @@ function shuffle(array) {
 }
 
 (async () => {
+  const locationService = new GeolocationService()
+  locationService.getCoords().then(coords => {
+    console.log(coords)
+    // TODO use coords, e.g. get city name from coords
+  })
+
+
   const dobbleDeckGenerator = new DobbleDeckGenerator(8, 57);
   const deck = shuffle(dobbleDeckGenerator.getDeck());
   console.log(deck);
