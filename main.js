@@ -5,7 +5,9 @@ import BasePage from "./pages/basePage.js";
 import Router from "./router.js";
 import GamePage from "./pages/gamePage.js";
 import HomePage from "./pages/homePage.js";
+import SettingsPage from "./pages/settingsPage.js";
 import { ScoreStorage, SettingsStorage } from "./dataStorage.js";
+import ScoresPage from "./pages/scoresPage.js";
 
 (async () => {
   const root = document.getElementById("root");
@@ -20,15 +22,16 @@ import { ScoreStorage, SettingsStorage } from "./dataStorage.js";
   const scoreStorage = new ScoreStorage(settings.cardsNumber);
 
   const dobbleDeckGenerator = new DobbleDeckGenerator(8, settings.cardsNumber);
-  const deck = dobbleDeckGenerator.getDeck();
-  const game = new DobbleGame(deck, { scoreStorage });
+
+  const game = new DobbleGame({ scoreStorage, settingsStorage, dobbleDeckGenerator });
 
   const defaultPageId = "home";
   const router = new Router(root, defaultPageId);
   const pages = [
     new HomePage(defaultPageId, { router }),
     new GamePage("game", { router }, game),
-    new BasePage("scores", { router }),
+    new SettingsPage("settings", { router, settingsStorage }),
+    new ScoresPage("scores", { router, scoreStorage }),
   ];
   pages.forEach(p => router.route(p));
   router.start();

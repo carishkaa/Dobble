@@ -26,9 +26,14 @@ export default class HomePage extends BasePage {
     const root = document.getElementById("root");
 
     // Create menu
-    const menu = document.createElement("div");
+    const menu = document.createElement("nav");
     menu.className = "menu";
     root.appendChild(menu);
+
+    // Title "Dobble"
+    const title = document.createElement("h1");
+    title.innerHTML = "Dobble";
+    menu.appendChild(title);
 
     // With button "Game"
     const gameButton = document.createElement("button");
@@ -39,6 +44,16 @@ export default class HomePage extends BasePage {
       this._router.redirect("game");
     };
     menu.appendChild(gameButton);
+
+    // "scores" button
+    const scoresButton = document.createElement("button");
+    scoresButton.className = "menu-button";
+    scoresButton.id = "scores-button";
+    scoresButton.innerText = "Scores";
+    scoresButton.onclick = () => {
+      this._router.redirect("scores");
+    };
+    menu.appendChild(scoresButton);
 
     // And button "Settings"
     const settingsButton = document.createElement("button");

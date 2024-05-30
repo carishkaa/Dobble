@@ -1,9 +1,9 @@
 export class DobbleGame {
-  constructor(deck, services) {
+  constructor(services) {
     this.permutations = [];
 
     this.symbolsPerCard = 8;
-    this.deck = this._shuffle(deck);
+    this.deck = services.dobbleDeckGenerator.getDeck();
 
     this.filenames = this._shuffle(this._getFileNames());
 
@@ -14,9 +14,17 @@ export class DobbleGame {
 
     this.currentPrimary = this.deck[0];
     this._scoreStorage = services.scoreStorage;
+    this._settingsStorage = services.settingsStorage;
+    this._dobbleDeckGenerator = services.dobbleDeckGenerator;
   }
 
   start() {
+    console.log("Game started ", this._settingsStorage.get().cardsNumber, " cards")
+    this._dobbleDeckGenerator.resetLimitNumberOfCards(
+      this._settingsStorage.get().cardsNumber
+    );
+    this.deck = this._dobbleDeckGenerator.getDeck();
+
     this._placeAllIconsPrimary(this.currentPrimary);
     this.timer = new Date().getTime();
 
@@ -94,7 +102,7 @@ export class DobbleGame {
     }
 
     if (this.deck[deckIndex] === undefined) {
-      return this._endGame()
+      return this._endGame();
     }
 
     const secondaryContainer = document.getElementById("main2");
@@ -105,7 +113,7 @@ export class DobbleGame {
   }
 
   _endGame() {
-    //audio 
+    //audio
     const audio = new Audio("audio/game_end.wav");
     audio.play();
     // blur
