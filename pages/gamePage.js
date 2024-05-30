@@ -13,7 +13,7 @@ export default class GamePage extends BasePage {
     return this._id;
   }
 
-  renderTo(elem) {
+  displayContent(elem) {
     elem.innerHTML = "";
     elem.append(this._elem);
   }

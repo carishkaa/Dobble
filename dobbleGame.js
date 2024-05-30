@@ -16,6 +16,12 @@ export class DobbleGame {
     this._scoreStorage = services.scoreStorage;
     this._settingsStorage = services.settingsStorage;
     this._dobbleDeckGenerator = services.dobbleDeckGenerator;
+
+    this._audio = {
+      correct: new Audio("audio/correct.mp3"),
+      bad: new Audio("audio/bad.wav"),
+      gameEnd: new Audio("audio/game_end.wav"),
+    };
   }
 
   start() {
@@ -53,6 +59,20 @@ export class DobbleGame {
     return this.score;
   }
 
+  _playAudio(audio) {
+    if (audio === "correct") {
+      this._audio.correct.currentTime = 0;
+      this._audio.correct.playbackRate = 1.5;
+      this._audio.correct.play();
+    } else if (audio === "bad") {
+      this._audio.bad.currentTime = 0;
+      this._audio.bad.play();
+    } else if (audio === "gameEnd") {
+      this._audio.gameEnd.currentTime = 0;
+      this._audio.gameEnd.play();
+    }
+  }
+
   _placeAllIconsPrimary(newDeckIndexes, oldDeckIndexes) {
     const iconContainers = document.querySelectorAll("#main .icon-container");
     const shuffledDeckIndexes = this._shuffle(newDeckIndexes);
@@ -69,15 +89,12 @@ export class DobbleGame {
       icon.onclick = () => {
         const symbolIdx = parseInt(icon.id.split("-")[1]);
         if (this._evaluate(symbolIdx, oldDeckIndexes)) {
-          const audio = new Audio("audio/correct.mp3");
-          audio.playbackRate = 1.5;
-          audio.play();
+          this._playAudio("correct");
           this._recalculateScore({ isCorrectSolution: true });
           this.currentDeckIdx += 1;
           this._refreshCards(this.currentDeckIdx);
         } else {
-          const audio = new Audio("audio/bad.wav");
-          audio.play();
+          this._playAudio("bad");
           this._recalculateScore({ isCorrectSolution: false });
           // Make animation
           icon.style.animation = "none";
@@ -113,9 +130,7 @@ export class DobbleGame {
   }
 
   _endGame() {
-    //audio
-    const audio = new Audio("audio/game_end.wav");
-    audio.play();
+    this._playAudio("gameEnd");
     // blur
     document.getElementById("main").style.filter = "blur(5px)";
     document.getElementById("main2").style.filter = "blur(3px)";
@@ -128,11 +143,13 @@ export class DobbleGame {
 
     this._scoreStorage.set(this.score);
 
+    const root = document.getElementById("root");
+
     // create modal window with button "Play again" and "Exit"
     const modal = document.createElement("div");
     modal.className = "menu";
     modal.id = "modal";
-    document.body.appendChild(modal);
+    root.appendChild(modal);
 
     const score = document.createElement("p");
     score.innerHTML = `Your score: ${this.score}`;
@@ -152,7 +169,7 @@ export class DobbleGame {
   }
 
   _scaleAndRotateRandomly(svg) {
-    const size = this._getRandom(80, 120); // Adjust size range
+    const size = this._getRandom(80, 117); // Adjust size range
     const angle = this._getRandom(0, 360);
 
     svg.style.width = `${size}px`;

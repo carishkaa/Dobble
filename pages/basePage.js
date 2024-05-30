@@ -10,7 +10,7 @@ export default class BasePage {
     return this._id;
   }
 
-  renderTo(elem) {
+  displayContent(elem) {
     elem.innerHTML = "";
     elem.append(this._elem);
   }

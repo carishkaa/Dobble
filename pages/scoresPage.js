@@ -12,7 +12,7 @@ export default class ScoresPage extends BasePage {
     return this._id;
   }
 
-  renderTo(elem) {
+  displayContent(elem) {
     elem.innerHTML = "";
     elem.append(this._elem);
   }
@@ -32,10 +32,14 @@ export default class ScoresPage extends BasePage {
     menu.style.overflow = "scroll";
     root.appendChild(menu);
 
+    const divForTable = document.createElement("div");
+    divForTable.className = "div-for-table";
+    menu.appendChild(divForTable);
+
     const scores = this._scoreStorage.get();
     const scoresTable = document.createElement("table");
     scoresTable.className = "scores-table";
-    menu.appendChild(scoresTable);
+    divForTable.appendChild(scoresTable);
 
     const header = document.createElement("tr");
     scoresTable.appendChild(header);
@@ -52,7 +56,6 @@ export default class ScoresPage extends BasePage {
     headerCell3.innerText = "# cards";
     header.appendChild(headerCell3);
 
-    // TODO inverse
     scores.reverse().forEach(score => {
       const row = document.createElement("tr");
       scoresTable.appendChild(row);

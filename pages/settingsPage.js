@@ -12,7 +12,7 @@ export default class SettingsPage extends BasePage {
     return this._id;
   }
 
-  renderTo(elem) {
+  displayContent(elem) {
     elem.innerHTML = "";
     elem.append(this._elem);
   }
@@ -38,6 +38,7 @@ export default class SettingsPage extends BasePage {
 
     // Create form (input integer for cards number, toggle for sound on/off, submit button)
     const form = document.createElement("form");
+    form.classList.add("settings-form");
     menu.appendChild(form);
 
     const settings = this._settingsStorage.get()
@@ -54,7 +55,7 @@ export default class SettingsPage extends BasePage {
     cardsNumberInput.max = "55";
     cardsNumberInput.value = settings.cardsNumber;
     form.appendChild(label);
-    form.appendChild(cardsNumberInput);
+    label.appendChild(cardsNumberInput);
 
     // Create label for sound
     const soundLabel = document.createElement("label");
@@ -67,13 +68,14 @@ export default class SettingsPage extends BasePage {
     sound.id = "sound";
     sound.name = "sound";
     sound.checked = settings.audioSound
-    form.appendChild(sound);
+    soundLabel.appendChild(sound);
     
 
     // Create submit button
     const submit = document.createElement("button");
     submit.type = "submit";
     submit.innerHTML = "Save";
+    submit.classList.add("menu-button");
     submit.addEventListener("click", (e) => {
       e.preventDefault();
       const cardsNumber = cardsNumberInput.value ? parseInt(cardsNumberInput.value) : 5;

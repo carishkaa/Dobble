@@ -51,7 +51,7 @@ export default class Router {
         if (newPageId in this._routes) {
             this._currentPage = this._routes[newPageId];
             this._currentPage.init();
-            this._currentPage.renderTo(this._root);
+            this._currentPage.displayContent(this._root);
         }
     }
 }

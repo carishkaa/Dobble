@@ -14,13 +14,14 @@
         font-family: "REM", sans-serif;
         /* background-color: gainsboro; */
         overflow: hidden;
-        background-image: url('https://i.pinimg.com/564x/54/33/b5/5433b581eca4396833c1165f36633039.jpg');
+        /* background-image: url('https://img.freepik.com/free-vector/flat-design-small-flowers-pattern_23-2149670474.jpg?t=st=1717095658~exp=1717099258~hmac=7f0c51e9a6c2cd8ac1743b5cc0dbc3d04b1bddc4628540fabf1734b1bbd0a0da&w=1380'); */
+        background-image: url('https://i.pinimg.com/564x/ca/ff/fc/cafffcb094db18e7900bd43bcf871b49.jpg');
       }
       #root{
         position: absolute;
         width: 100%;
         height: 100%;
-        backdrop-filter: blur(2px);
+        backdrop-filter: blur(3px);
         -webkit-backdrop-filter: blur(2px);
       }
       .game {
@@ -57,6 +58,18 @@
             left: 50%; */
         /* transform: translate(100px); */
       }
+      .div-for-table {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(255, 255, 255, 0.7);
+        padding: 20px;
+        border-radius: 20px;
+        width: 50%;
+        max-height: 70%;
+        overflow: scroll;
+      }
 
       .menu {
         position: absolute;
@@ -81,17 +94,21 @@
         border-radius: 50px;
         background-color: #99a1ff;
         cursor: pointer;
-        width: 90%;
+        width: 70%;
         height: 70px;
         font-size: 20px;
         font-family: "REM", sans-serif;
       }
 
       .scores-table {
-        position: relative;
-        height: 50%;
         width: 100%;
-        top: 60%; /* NEFUNGUJE */
+        height: 100%;
+        overflow: scroll;
+      }
+      .scores-table td {
+        padding: 10px;
+        /* border: 1px solid black; */
+        text-align: center;
       }
 
 /* ============ */
@@ -108,6 +125,14 @@ button {
  font-size: 15px;
 }
 
+.settings-form .menu-button {
+  font-weight: 600;
+  color: #382b22;
+  text-transform: uppercase;
+  padding: 0.25em 1em;
+  background: #f7f0ff;
+  width: 50%
+}
 button.menu-button {
  font-weight: 600;
  color: #382b22;
@@ -122,49 +147,18 @@ button.menu-button {
  transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), background 150ms cubic-bezier(0, 0, 0.58, 1), -webkit-transform 150ms cubic-bezier(0, 0, 0.58, 1);
 }
 
-button.menu-button::before {
- position: absolute;
- content: '';
- width: 100%;
- height: 100%;
- top: 0;
- left: 0;
- right: 0;
- bottom: 0;
- background: #dec4f9;
- border-radius: inherit;
- -webkit-box-shadow: 0 0 0 2px #a285b1, 0 0.625em 0 0 #efe2ff;
- box-shadow: 0 0 0 2px #a285b1, 0 0.625em 0 0 #efe2ff;
- -webkit-transform: translate3d(0, 0.75em, -1em);
- transform: translate3d(0, 0.75em, -1em);
- transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), box-shadow 150ms cubic-bezier(0, 0, 0.58, 1), -webkit-transform 150ms cubic-bezier(0, 0, 0.58, 1), -webkit-box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
-}
-
 button.menu-button:hover {
  background: #f5e9ff;
- -webkit-transform: translate(0, 0.25em);
- transform: translate(0, 0.25em);
-}
-
-button.menu-button:hover::before {
- -webkit-box-shadow: 0 0 0 2px #a285b1, 0 0.5em 0 0 #efe2ff;
- box-shadow: 0 0 0 2px #a285b1, 0 0.5em 0 0 #efe2ff;
- -webkit-transform: translate3d(0, 0.5em, -1em);
- transform: translate3d(0, 0.5em, -1em);
+ -webkit-transform: scale(1.02);
+ transform: scale(1.1);
 }
 
 button.menu-button:active {
  background: #f5e9ff;
- -webkit-transform: translate(0em, 0.75em);
- transform: translate(0em, 0.75em);
+ -webkit-transform: scale(0.9);
+ transform: scale(0.9);
 }
 
-button.menu-button:active::before {
- -webkit-box-shadow: 0 0 0 2px #a285b1, 0 0 #efe2ff;
- box-shadow: 0 0 0 2px #a285b1, 0 0 #efe2ff;
- -webkit-transform: translate3d(0, 0, -1em);
- transform: translate3d(0, 0, -1em);
-}
 
 
 /* ----------------- */
@@ -221,6 +215,19 @@ button.menu-button:active::before {
         background-color: whitesmoke;
       }
 
+      .settings-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        /* between gap */
+        gap: 20px;
+        font-size: x-large;
+        font-weight: 400;
+      }
+
       @keyframes shake {
         0% {
           transform: translateX(0);
@@ -255,6 +262,13 @@ button.menu-button:active::before {
         }
         .container:nth-child(2) {
           transform: translateY(51%);
+        }
+        .menu {
+          width: 90%;
+          height: 80%;
+        }
+        .div-for-table {
+          width: 80%;
         }
         #result {
           top: 0%;
