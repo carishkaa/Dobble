@@ -1,13 +1,9 @@
 export class DobbleGame {
-  constructor(deck) {
+  constructor(deck, services) {
     this.permutations = [];
 
     this.symbolsPerCard = 8;
     this.deck = this._shuffle(deck);
-
-    // TODO control deck length by settings
-    this.deck = this.deck.slice(0, 10);
-    console.log(this.deck)
 
     this.filenames = this._shuffle(this._getFileNames());
 
@@ -17,6 +13,7 @@ export class DobbleGame {
     this.timer = new Date().getTime();
 
     this.currentPrimary = this.deck[0];
+    this._scoreStorage = services.scoreStorage;
   }
 
   start() {
@@ -108,8 +105,6 @@ export class DobbleGame {
   }
 
   _endGame() {
-    console.log("End game", this.score);
-
     //audio 
     const audio = new Audio("audio/game_end.wav");
     audio.play();
@@ -122,6 +117,8 @@ export class DobbleGame {
     for (let i = 0; i < svgIcons.length; i++) {
       svgIcons[i].onclick = () => {};
     }
+
+    this._scoreStorage.set(this.score);
 
     // create modal window with button "Play again" and "Exit"
     const modal = document.createElement("div");

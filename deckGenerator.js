@@ -19,6 +19,10 @@ export class DobbleDeckGenerator {
   /** Code was taken from https://github.com/Darkseal/dobble/blob/master/dobble.js, and been modified */
   // TODO make js generator
   generatePermutations() {
+    const isEnoughCards = () => {
+      console.log('isEnoughCards', this.numberOfCards, this.limitNumberOfCards)
+      return this.numberOfCards >= this.limitNumberOfCards;
+    };
     const N = this.symbolsPerCard;
     for (let i = 0; i <= N - 1; i++) {
       const s = [];
@@ -28,6 +32,7 @@ export class DobbleDeckGenerator {
         s.push(N - 1 + (N - 1) * (i - 1) + (i2 + 1));
       }
       this.cards.push(s);
+      if (isEnoughCards()) return;
     }
     for (let i = 1; i <= N - 1; i++) {
       for (let i2 = 1; i2 <= N - 1; i2++) {
@@ -43,6 +48,7 @@ export class DobbleDeckGenerator {
           );
         }
         this.cards.push(s);
+        if (isEnoughCards()) return;
       }
     }
   }
