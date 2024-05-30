@@ -25,11 +25,12 @@ export default class HomePage extends BasePage {
   _initHtml() {
     const root = document.getElementById("root");
 
-    // create menu with buttons "game", "settings"
+    // Create menu
     const menu = document.createElement("div");
     menu.className = "menu";
     root.appendChild(menu);
 
+    // With button "Game"
     const gameButton = document.createElement("button");
     gameButton.className = "menu-button";
     gameButton.id = "game-button";
@@ -39,6 +40,7 @@ export default class HomePage extends BasePage {
     };
     menu.appendChild(gameButton);
 
+    // And button "Settings"
     const settingsButton = document.createElement("button");
     settingsButton.className = "menu-button";
     settingsButton.id = "settings-button";

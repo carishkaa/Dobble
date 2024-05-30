@@ -5,6 +5,10 @@ export class DobbleGame {
     this.symbolsPerCard = 8;
     this.deck = this._shuffle(deck);
 
+    // TODO control deck length by settings
+    this.deck = this.deck.slice(0, 10);
+    console.log(this.deck)
+
     this.filenames = this._shuffle(this._getFileNames());
 
     this.score = 0;
@@ -60,12 +64,17 @@ export class DobbleGame {
       icon.onclick = () => {
         const symbolIdx = parseInt(icon.id.split("-")[1]);
         if (this._evaluate(symbolIdx, oldDeckIndexes)) {
+          const audio = new Audio("audio/correct.mp3");
+          audio.playbackRate = 1.5;
+          audio.play();
           this._recalculateScore({ isCorrectSolution: true });
           this.currentDeckIdx += 1;
           this._refreshCards(this.currentDeckIdx);
         } else {
+          const audio = new Audio("audio/bad.wav");
+          audio.play();
           this._recalculateScore({ isCorrectSolution: false });
-          // make animation
+          // Make animation
           icon.style.animation = "none";
           icon.offsetHeight; /* trigger reflow */
           icon.style.animation = "shake 0.2s";
@@ -87,11 +96,54 @@ export class DobbleGame {
       svgIcons[i].style.animation = "none";
     }
 
+    if (this.deck[deckIndex] === undefined) {
+      return this._endGame()
+    }
+
     const secondaryContainer = document.getElementById("main2");
     secondaryContainer.innerHTML = primaryContainer.innerHTML;
     const previousPrimary = this.currentPrimary;
     this.currentPrimary = this.deck[deckIndex];
     this._placeAllIconsPrimary(this.currentPrimary, previousPrimary);
+  }
+
+  _endGame() {
+    console.log("End game", this.score);
+
+    //audio 
+    const audio = new Audio("audio/game_end.wav");
+    audio.play();
+    // blur
+    document.getElementById("main").style.filter = "blur(5px)";
+    document.getElementById("main2").style.filter = "blur(3px)";
+
+    // remove onclick
+    let svgIcons = document.getElementsByClassName("svg-icon");
+    for (let i = 0; i < svgIcons.length; i++) {
+      svgIcons[i].onclick = () => {};
+    }
+
+    // create modal window with button "Play again" and "Exit"
+    const modal = document.createElement("div");
+    modal.className = "menu";
+    modal.id = "modal";
+    document.body.appendChild(modal);
+
+    const score = document.createElement("p");
+    score.innerHTML = `Your score: ${this.score}`;
+    modal.appendChild(score);
+
+    const playAgainButton = document.createElement("button");
+    playAgainButton.innerHTML = "Play again";
+    playAgainButton.onclick = () => {
+      this._restartGame();
+    };
+
+    const exitButton = document.createElement("button");
+    exitButton.innerHTML = "Exit";
+    exitButton.onclick = () => {
+      window.location.href = "/";
+    };
   }
 
   _scaleAndRotateRandomly(svg) {
