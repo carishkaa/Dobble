@@ -16,6 +16,7 @@ export class DobbleGame {
     this._scoreStorage = services.scoreStorage;
     this._settingsStorage = services.settingsStorage;
     this._dobbleDeckGenerator = services.dobbleDeckGenerator;
+    this._router = services.router;
 
     this._audio = {
       correct: new Audio("audio/correct.mp3"),
@@ -25,7 +26,8 @@ export class DobbleGame {
   }
 
   start() {
-    console.log("Game started ", this._settingsStorage.get().cardsNumber, " cards")
+    this.score = 0;
+    this.currentDeckIdx = 0;
     this._dobbleDeckGenerator.resetLimitNumberOfCards(
       this._settingsStorage.get().cardsNumber
     );
@@ -60,6 +62,7 @@ export class DobbleGame {
   }
 
   _playAudio(audio) {
+    if (!this._settingsStorage.get().audioSound) return;
     if (audio === "correct") {
       this._audio.correct.currentTime = 0;
       this._audio.correct.playbackRate = 1.5;
@@ -145,27 +148,80 @@ export class DobbleGame {
 
     const root = document.getElementById("root");
 
-    // create modal window with button "Play again" and "Exit"
-    const modal = document.createElement("div");
+    // Create modal window with button "Exit"
+    const modal = document.createElement("aside");
     modal.className = "menu";
     modal.id = "modal";
     root.appendChild(modal);
 
+    this._getSvgAnimation(modal);
+
+    const modalResults = document.createElement("aside");
+    modalResults.className = "menu";
+    modalResults.id = "menu-results";
+    root.appendChild(modalResults);
+
+    const header = document.createElement("h1");
+    header.innerHTML = "Great work!";
+    modalResults.appendChild(header);
+
     const score = document.createElement("p");
     score.innerHTML = `Your score: ${this.score}`;
-    modal.appendChild(score);
-
-    const playAgainButton = document.createElement("button");
-    playAgainButton.innerHTML = "Play again";
-    playAgainButton.onclick = () => {
-      this._restartGame();
-    };
+    modalResults.appendChild(score);
 
     const exitButton = document.createElement("button");
     exitButton.innerHTML = "Exit";
+    exitButton.className = "menu-button";
     exitButton.onclick = () => {
-      window.location.href = "/";
+      this._router.redirect("home");
     };
+    modalResults.appendChild(exitButton);
+  }
+
+  _getSvgAnimation(root) {
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.id = "fireworks";
+    svg.setAttribute('width', '100%');
+    svg.setAttribute('height', '100%');
+    root.append(svg);
+
+    const svgNS = "http://www.w3.org/2000/svg";
+    function createCircle(cx, cy, r, fill) {
+      const circle = document.createElementNS(svgNS, 'circle');
+      circle.setAttribute('cx', cx);
+      circle.setAttribute('cy', cy);
+      circle.setAttribute('r', r);
+      circle.setAttribute('fill', fill);
+      return circle;
+    }
+    const animateFirework = (x, y) => {
+      const colors = ['#FF5733', '#FFBD33', '#DBFF33', '#75FF33', '#33FF57', '#33FFBD', '#33DBFF', '#3375FF', '#5733FF', '#BD33FF'];
+      for (let i = 0; i < 10; i++) {
+          const angle = (i / 10) * 2 * Math.PI;
+          const dx = Math.cos(angle) * 100;
+          const dy = Math.sin(angle) * 100;
+          const circle = createCircle(x, y, 5, colors[i % colors.length]);
+          svg.appendChild(circle);
+
+          circle.animate([
+              { transform: `translate(0, 0)`, opacity: 1 },
+              { transform: `translate(${dx}px, ${dy}px)`, opacity: 0 }
+          ], {
+              duration: 4000,
+              easing: 'ease-out',
+              fill: 'forwards'
+          });
+      }
+    }
+    const randomFirework = () => {
+      const x = Math.random() * window.innerWidth;
+      const y = Math.random() * window.innerHeight;
+      animateFirework(x, y);
+  }
+    
+    for (let i = 0; i < 50; i++) {
+      randomFirework()
+    }
   }
 
   _scaleAndRotateRandomly(svg) {

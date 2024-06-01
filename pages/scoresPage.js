@@ -32,6 +32,11 @@ export default class ScoresPage extends BasePage {
     menu.style.overflow = "scroll";
     root.appendChild(menu);
 
+    const backLink = document.createElement('a')
+    backLink.onclick = () => this._router.redirect('home')
+    backLink.classList.add('back-arrow')
+    menu.appendChild(backLink)
+
     const divForTable = document.createElement("div");
     divForTable.className = "div-for-table";
     menu.appendChild(divForTable);
@@ -44,6 +49,13 @@ export default class ScoresPage extends BasePage {
     const header = document.createElement("tr");
     scoresTable.appendChild(header);
 
+    if (scores.length === 0) {
+      const cell = document.createElement("td");
+      cell.innerText = "No scores found...\n Play to get some! :)";
+      header.appendChild(cell);
+      return menu
+    }
+
     const headerCell = document.createElement("th");
     headerCell.innerText = "Date";
     header.appendChild(headerCell);
@@ -53,7 +65,7 @@ export default class ScoresPage extends BasePage {
     header.appendChild(headerCell2);
 
     const headerCell3 = document.createElement("th");
-    headerCell3.innerText = "# cards";
+    headerCell3.innerText = "Cards";
     header.appendChild(headerCell3);
 
     scores.reverse().forEach(score => {

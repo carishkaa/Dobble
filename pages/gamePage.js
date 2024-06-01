@@ -14,7 +14,7 @@ export default class GamePage extends BasePage {
   }
 
   displayContent(elem) {
-    elem.innerHTML = "";
+    elem.innerHTML = ""; //
     elem.append(this._elem);
   }
 

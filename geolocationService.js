@@ -18,6 +18,10 @@ export class GeolocationService {
       return { ...this._coords };
     }
 
+    if (!navigator.geolocation) {
+      throw new LocationFetchError("Geolocation is not supported by your browser");
+    }
+
     try {
       const pos = await this._getCurrentPosition();
       this._lastRefresh = new Date().getTime();
@@ -34,5 +38,19 @@ export class GeolocationService {
     return new Promise((resolve, reject) =>
       navigator.geolocation.getCurrentPosition(resolve, reject)
     );
+  }
+}
+
+export class OnlineService {
+  isOnline (){
+      return navigator.onLine
+  }
+
+  addOnlineEvent(onlineEventHandler) {
+      window.addEventListener('online', onlineEventHandler);
+  }
+
+  addOfflineEvent(offlineEventHandler) {
+      window.addEventListener('offline', offlineEventHandler);
   }
 }

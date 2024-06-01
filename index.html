@@ -24,6 +24,18 @@
         backdrop-filter: blur(3px);
         -webkit-backdrop-filter: blur(2px);
       }
+      h1 {
+        font-size: 50px;
+        text-align: center;
+      }
+      p {
+        font-size: 20px;
+        text-align: center;
+      }
+
+      li {
+        list-style-type: none;
+      }
       .game {
         position: absolute;
         display: flex;
@@ -37,6 +49,7 @@
         position: absolute;
         background-color: white;
         border-radius: 50%;
+        top: 20%;
         width: 430px;
         height: 430px;
       }
@@ -66,7 +79,7 @@
         background-color: rgba(255, 255, 255, 0.7);
         padding: 20px;
         border-radius: 20px;
-        width: 50%;
+        width: 60%;
         max-height: 70%;
         overflow: scroll;
       }
@@ -215,6 +228,44 @@ button.menu-button:active {
         background-color: whitesmoke;
       }
 
+      /* q in ul with status-info class */
+      ul.status-info q::before {
+        content: 'Today\'s quote: "';
+        font-size: 20px;
+        color: #a285b1;
+      }
+      ul.status-info q::after {
+        content: '"';
+        font-size: 20px;
+        color: #a285b1;
+      }
+
+      ul.status-info .coords::before {
+        content: 'Coordinates: ';
+        font-size: 20px;
+        color: #a285b1;
+      }
+      .status-info {
+        margin: 0px;
+        padding: 0px;
+      }
+
+      input {
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid black;
+        font-size: 20px;
+        /* width: 50%; */
+        text-align: center;
+        margin: 10px;
+      }
+      /* input type checkbox */
+      input[type='checkbox'] {
+        width: 20px;
+        height: 20px;
+        accent-color: #a285b1;
+      }
+
       .settings-form {
         display: flex;
         flex-direction: column;
@@ -226,6 +277,25 @@ button.menu-button:active {
         gap: 20px;
         font-size: x-large;
         font-weight: 400;
+      }
+      .back-arrow::before {
+          content: '←';
+          display: inline-block;
+          background: rgba(255, 255, 255, 0.6);
+          border-radius: 50%;
+          height: 2rem;
+          width: 2rem;
+          line-height: 2rem;
+          text-align: center;
+          color: #000;
+          font-weight: 500;
+      }
+      .back-arrow {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        font-size: 20px;
+        cursor: pointer;
       }
 
       @keyframes shake {
@@ -254,6 +324,7 @@ button.menu-button:active {
           align-items: center;
         }
         .container {
+          top: auto;
           width: 300px;
           height: 300px;
         }
