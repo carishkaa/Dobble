@@ -120,7 +120,8 @@ export default class SettingsPage extends BasePage {
           .then(res => {
             coords.textContent = `${res.lat}, ${res.lng}`;
           })
-          .catch(() => {
+          .catch((e) => {
+            console.log(e)
             coords.textContent = "Failed to fetch coordinates";
           });
         // Get quote

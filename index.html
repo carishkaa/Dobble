@@ -6,23 +6,17 @@
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Press+Start+2P&family=REM:ital,wght@0,100..900;1,100..900&display=swap');
       body {
-        /* display: flex;
-        justify-content: center;
-        align-items: center; */
-        /* height: 100%; */
         margin: 0; /* remove default margin */
         font-family: "REM", sans-serif;
-        /* background-color: gainsboro; */
         overflow: hidden;
-        /* background-image: url('https://img.freepik.com/free-vector/flat-design-small-flowers-pattern_23-2149670474.jpg?t=st=1717095658~exp=1717099258~hmac=7f0c51e9a6c2cd8ac1743b5cc0dbc3d04b1bddc4628540fabf1734b1bbd0a0da&w=1380'); */
-        background-image: url('https://i.pinimg.com/564x/ca/ff/fc/cafffcb094db18e7900bd43bcf871b49.jpg');
+        background-image: url('./figures/background.jpeg');
       }
       #root{
         position: absolute;
         width: 100%;
         height: 100%;
         backdrop-filter: blur(3px);
-        -webkit-backdrop-filter: blur(2px);
+        -webkit-backdrop-filter: blur(3px);
       }
       h1 {
         font-size: 50px;
@@ -55,16 +49,10 @@
       }
       .icon-container {
         position: absolute;
-        /* padding: 10px; */
-        /* width: 60px;
-            height: 50px; */
         top: 50%;
         left: 50%;
-        /* background-color: #99a1ff; */
-        /* opacity: 50%; */
         display: flex;
         align-items: center;
-        /* border-radius: 40%; */
       }
       .icon-container.center {
         /* top: 50%;
@@ -93,7 +81,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        background-color: rgba(255, 255, 255, 0.7);
+        background-color: rgba(255, 255, 255, 0.8);
         padding: 20px;
         border-radius: 20px;
         /* size */
@@ -120,7 +108,6 @@
       }
       .scores-table td {
         padding: 10px;
-        /* border: 1px solid black; */
         text-align: center;
       }
 
@@ -255,7 +242,6 @@ button.menu-button:active {
         border-radius: 10px;
         border: 1px solid black;
         font-size: 20px;
-        /* width: 50%; */
         text-align: center;
         margin: 10px;
       }
