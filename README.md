@@ -3,7 +3,7 @@
 Online game based on the popular card game Spot it! (also known as Dobble). The game is a semester project for the course *B0B39KAJ - Client applications in JavaScript* at the CTU in Prague.
 
 ## Overview:
-Dobble is a simple pattern recognition game in which player try to find an image shown on two cards.  Any two cards have exactly one symbol in common. The game is one-player and the player has to find the matching symbol on the two cards. Scores are based on the time taken to find the matching symbol.
+Dobble is a simple pattern recognition game in which player tries to find an image shown on two cards.  Any two cards have exactly one symbol in common. The game is one-player and the player has to find the matching symbol and click on it on theirs card. Scores are based on the time taken to find the matching symbol.
 
 ## How to use:
 On a home page you can see a menu with three buttons: Play, Scores, and Settings.
@@ -26,6 +26,7 @@ On a home page you can see a menu with three buttons: Play, Scores, and Settings
 
 ### Project requirements (in Czech):
 | Požadavek | Komentář |
+| --- | --- |
 | Dokumentace | README.md |
 | Validní použití HTML5 doctype | Otestováno na [validator.w3.org](https://validator.w3.org/) |
 | Fungující v moderních prohlíčečích | Otestováno v Chrome, Safari, Firefox, Opera |
