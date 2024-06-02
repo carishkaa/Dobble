@@ -5,6 +5,7 @@ export default class SettingsPage extends BasePage {
     this._id = id;
     this._router = services.router;
     this._settingsStorage = services.settingsStorage;
+    this._scoreStorage = services.scoreStorage;
     this._onlineService = services.onlineService;
     this._locationService = services.locationService;
     this._elem = "";
@@ -91,6 +92,7 @@ export default class SettingsPage extends BasePage {
       }
       const audioSound = sound.checked;
       this._settingsStorage.set({ cardsNumber, audioSound });
+      this._scoreStorage.updateCardsNumber(cardsNumber);
       this._router.redirect("home");
     });
     form.appendChild(submit);

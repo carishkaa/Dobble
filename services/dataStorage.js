@@ -50,6 +50,10 @@ export class ScoreStorage extends DataStorage {
         this._cardsNumber = cardsNumber;
     }
 
+    updateCardsNumber(cardsNumber) {
+        this._cardsNumber = cardsNumber;
+    }
+
     set(score) {
         const currentScores = this.get();
         currentScores.push({

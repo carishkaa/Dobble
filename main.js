@@ -5,7 +5,7 @@ import Router from "./router.js";
 import GamePage from "./pages/gamePage.js";
 import HomePage from "./pages/homePage.js";
 import SettingsPage from "./pages/settingsPage.js";
-import { ScoreStorage, SettingsStorage } from "./dataStorage.js";
+import { ScoreStorage, SettingsStorage } from "./services/dataStorage.js";
 import ScoresPage from "./pages/scoresPage.js";
 
 (async () => {
@@ -25,7 +25,7 @@ import ScoresPage from "./pages/scoresPage.js";
   const pages = [
     new HomePage(defaultPageId, { router }),
     new GamePage("game", { router }, game),
-    new SettingsPage("settings", { router, settingsStorage, onlineService, locationService }),
+    new SettingsPage("settings", { router, settingsStorage, onlineService, locationService, scoreStorage }),
     new ScoresPage("scores", { router, scoreStorage }),
   ];
   pages.forEach(p => router.route(p));
