@@ -1,7 +1,7 @@
-import { DobbleDeckGenerator } from "./deckGenerator.js";
-import { GeolocationService, OnlineService } from "./geolocationService.js";
-import { DobbleGame } from "./dobbleGame.js";
-import Router from "./router.js";
+import { DobbleDeckGenerator } from "./services/deckGenerator.js";
+import { GeolocationService, OnlineService } from "./services/geolocationService.js";
+import { DobbleGame } from "./services/dobbleGame.js";
+import Router from "./pages/router.js";
 import GamePage from "./pages/gamePage.js";
 import HomePage from "./pages/homePage.js";
 import SettingsPage from "./pages/settingsPage.js";
