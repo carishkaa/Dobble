@@ -44,10 +44,6 @@ export default class Router {
                 break;
         }
 
-        if (this._currentPage) {
-            this._currentPage.destroy();
-        }
-
         if (newPageId in this._routes) {
             this._currentPage = this._routes[newPageId];
             this._currentPage.init();

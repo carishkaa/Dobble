@@ -23,8 +23,6 @@ export default class GamePage extends BasePage {
     this._game.start();
   }
 
-  destroy() {}
-
   _initHtml() {
     const root = document.getElementById("root");
 

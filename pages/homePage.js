@@ -20,8 +20,6 @@ export default class HomePage extends BasePage {
     this._elem = this._initHtml();
   }
 
-  destroy() {}
-
   _initHtml() {
     const root = document.getElementById("root");
 
